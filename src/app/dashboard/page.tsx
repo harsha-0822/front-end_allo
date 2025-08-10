@@ -45,19 +45,19 @@ export default function DashboardPage() {
   // Fetches patients, doctors, and appointments from the backend
   const fetchData = async (token: string) => {
     try {
-      const patientsRes = await fetch('http://localhost:3000/patients', {
+      const patientsRes = await fetch('https://young-inlet-39708.herokuapp.com/patients', {
         headers: { Authorization: `Bearer ${token}` },
       });
       const patientsData = await patientsRes.json();
       setPatients(patientsData);
 
-      const doctorsRes = await fetch('http://localhost:3000/doctors', {
+      const doctorsRes = await fetch('https://young-inlet-39708.herokuapp.com/doctors', {
         headers: { Authorization: `Bearer ${token}` },
       });
       const doctorsData = await doctorsRes.json();
       setDoctors(doctorsData);
 
-      const appointmentsRes = await fetch('http://localhost:3000/appointments', {
+      const appointmentsRes = await fetch('https://young-inlet-39708.herokuapp.com/appointments', {
         headers: { Authorization: `Bearer ${token}` },
       });
       const appointmentsData = await appointmentsRes.json();
@@ -86,7 +86,7 @@ export default function DashboardPage() {
     if (!newPatientName || !token) return;
     
     try {
-      await fetch('http://localhost:3000/patients', {
+      await fetch('https://young-inlet-39708.herokuapp.com/patients', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -107,7 +107,7 @@ export default function DashboardPage() {
       const token = localStorage.getItem('accessToken');
       if (!newDoctor.name || !newDoctor.specialization || !token) return;
       try {
-          await fetch('http://localhost:3000/doctors', {
+          await fetch('https://young-inlet-39708.herokuapp.com/doctors', {
               method: 'POST',
               headers: {
                   'Content-Type': 'application/json',
@@ -129,7 +129,7 @@ export default function DashboardPage() {
     if (!newAppointment.patientId || !newAppointment.doctorId || !newAppointment.time || !token) return;
 
     try {
-        await fetch('http://localhost:3000/appointments', {
+        await fetch('https://young-inlet-39708.herokuapp.com/appointments', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -154,7 +154,7 @@ export default function DashboardPage() {
     if (!token) return;
 
     try {
-      await fetch(`http://localhost:3000/patients/${id}`, {
+      await fetch(`https://young-inlet-39708.herokuapp.com/patients/${id}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
@@ -174,7 +174,7 @@ export default function DashboardPage() {
     if (!token) return;
 
     try {
-      await fetch(`http://localhost:3000/appointments/${id}`, {
+      await fetch(`https://young-inlet-39708.herokuapp.com/appointments/${id}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
@@ -194,7 +194,7 @@ export default function DashboardPage() {
     if (!token) return;
     
     try {
-      await fetch(`http://localhost:3000/patients/${id}`, {
+      await fetch(`https://young-inlet-39708.herokuapp.com/patients/${id}`, {
         method: 'DELETE',
         headers: {
           Authorization: `Bearer ${token}`,
@@ -211,7 +211,7 @@ export default function DashboardPage() {
     if (!token) return;
     
     try {
-      await fetch(`http://localhost:3000/doctors/${id}`, {
+      await fetch(`https://young-inlet-39708.herokuapp.com/doctors/${id}`, {
         method: 'DELETE',
         headers: {
           Authorization: `Bearer ${token}`,
@@ -228,7 +228,7 @@ export default function DashboardPage() {
     if (!token) return;
     
     try {
-      await fetch(`http://localhost:3000/appointments/${id}`, {
+      await fetch(`https://young-inlet-39708.herokuapp.com/appointments/${id}`, {
         method: 'DELETE',
         headers: { Authorization: `Bearer ${token}` },
       });
