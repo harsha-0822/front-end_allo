@@ -42,7 +42,20 @@ export default function DashboardPage() {
   });
   const router = useRouter();
 
-  // Fetches patients, doctors, and appointments from the backend
+  const getStatusColor = (status: string) => {
+    switch (status) {
+      case 'Waiting': return 'bg-yellow-100 text-yellow-800 border-yellow-200';
+      case 'With Doctor': return 'bg-blue-100 text-blue-800 border-blue-200';
+      case 'Completed': return 'bg-green-100 text-green-800 border-green-200';
+      case 'Available': return 'bg-green-100 text-green-800 border-green-200';
+      case 'Busy': return 'bg-red-100 text-red-800 border-red-200';
+      case 'Off Duty': return 'bg-gray-100 text-gray-800 border-gray-200';
+      case 'Booked': return 'bg-blue-100 text-blue-800 border-blue-200';
+      case 'Canceled': return 'bg-red-100 text-red-800 border-red-200';
+      default: return 'bg-gray-100 text-gray-800 border-gray-200';
+    }
+  };
+
   const fetchData = async (token: string) => {
     try {
       const patientsRes = await fetch('https://young-inlet-39708.herokuapp.com/patients', {
@@ -69,7 +82,6 @@ export default function DashboardPage() {
     }
   };
 
-  // Checks for a valid token and fetches data on page load
   useEffect(() => {
     const token = localStorage.getItem('accessToken');
     if (!token) {
@@ -79,7 +91,6 @@ export default function DashboardPage() {
     }
   }, [router]);
 
-  // Adds a new patient to the queue
   const handleAddPatient = async (e: React.FormEvent) => {
     e.preventDefault();
     const token = localStorage.getItem('accessToken');
@@ -101,7 +112,6 @@ export default function DashboardPage() {
     }
   };
 
-  // Adds a new doctor
   const handleAddDoctor = async (e: React.FormEvent) => {
       e.preventDefault();
       const token = localStorage.getItem('accessToken');
@@ -122,7 +132,6 @@ export default function DashboardPage() {
       }
   };
 
-  // Books a new appointment
   const handleBookAppointment = async (e: React.FormEvent) => {
     e.preventDefault();
     const token = localStorage.getItem('accessToken');
@@ -148,7 +157,6 @@ export default function DashboardPage() {
     }
   };
 
-  // Updates a patient's status
   const handleUpdatePatientStatus = async (id: number, status: string) => {
     const token = localStorage.getItem('accessToken');
     if (!token) return;
@@ -168,7 +176,6 @@ export default function DashboardPage() {
     }
   };
 
-  // Updates an appointment's status
   const handleUpdateAppointmentStatus = async (id: number, status: string) => {
     const token = localStorage.getItem('accessToken');
     if (!token) return;
@@ -188,7 +195,6 @@ export default function DashboardPage() {
     }
   };
 
-  // Deletes
   const handleDeletePatient = async (id: number) => {
     const token = localStorage.getItem('accessToken');
     if (!token) return;
@@ -241,20 +247,6 @@ export default function DashboardPage() {
   const handleLogout = () => {
     localStorage.removeItem('accessToken');
     router.push('/');
-  };
-
-  const getStatusColor = (status: string) => {
-    switch (status) {
-      case 'Waiting': return 'bg-yellow-100 text-yellow-800 border-yellow-200';
-      case 'With Doctor': return 'bg-blue-100 text-blue-800 border-blue-200';
-      case 'Completed': return 'bg-green-100 text-green-800 border-green-200';
-      case 'Available': return 'bg-green-100 text-green-800 border-green-200';
-      case 'Busy': return 'bg-red-100 text-red-800 border-red-200';
-      case 'Off Duty': return 'bg-gray-100 text-gray-800 border-gray-200';
-      case 'Booked': return 'bg-blue-100 text-blue-800 border-blue-200';
-      case 'Canceled': return 'bg-red-100 text-red-800 border-red-200';
-      default: return 'bg-gray-100 text-gray-800 border-gray-200';
-    }
   };
 
   if (loading) {
@@ -325,7 +317,7 @@ export default function DashboardPage() {
                 placeholder="Enter patient name"
                 value={newPatientName}
                 onChange={(e) => setNewPatientName(e.target.value)}
-                className="flex-grow px-4 py-3 bg-white/20 backdrop-blur-sm border border-white/30 rounded-xl text-white placeholder-white/70 focus:outline-none focus:ring-2 focus:ring-cyan-400 focus:border-transparent transition-all duration-300"
+                className="flex-grow px-4 py-3 bg-white/20 backdrop-blur-sm border border-white/30 rounded-xl text-white placeholder-white/70 focus:outline-none focus:ring-2 focus:ring-cyan-400 focus:border-transparent transition-all duration-300 hover:bg-white/25"
               />
               <button type="submit" className="px-6 py-3 bg-gradient-to-r from-cyan-400 to-blue-500 text-white rounded-xl hover:from-cyan-500 hover:to-blue-600 shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300">
                 Add
@@ -423,7 +415,7 @@ export default function DashboardPage() {
                         {appointment.status}
                       </span>
                     </div>
-                    <div className="flex gap-2 ml-4">
+                    <div className="flex gap-3 ml-4">
                       <select 
                         value={appointment.status} 
                         onChange={(e) => handleUpdateAppointmentStatus(appointment.id, e.target.value)}
