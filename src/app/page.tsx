@@ -16,7 +16,7 @@ export default function LoginPage() {
     setIsLoading(true);
 
     try {
-      const response = await fetch('https://young-inlet-39708.herokuapp.com/auth/login', {
+      const response = await fetch('web-production-85322.up.railway.app/auth/login', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

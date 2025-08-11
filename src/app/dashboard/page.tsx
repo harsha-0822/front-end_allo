@@ -58,19 +58,19 @@ export default function DashboardPage() {
 
   const fetchData = async (token: string) => {
     try {
-      const patientsRes = await fetch('https://young-inlet-39708.herokuapp.com/patients', {
+      const patientsRes = await fetch('web-production-85322.up.railway.app/patients', {
         headers: { Authorization: `Bearer ${token}` },
       });
       const patientsData = await patientsRes.json();
       setPatients(patientsData);
 
-      const doctorsRes = await fetch('https://young-inlet-39708.herokuapp.com/doctors', {
+      const doctorsRes = await fetch('web-production-85322.up.railway.app/doctors', {
         headers: { Authorization: `Bearer ${token}` },
       });
       const doctorsData = await doctorsRes.json();
       setDoctors(doctorsData);
 
-      const appointmentsRes = await fetch('https://young-inlet-39708.herokuapp.com/appointments', {
+      const appointmentsRes = await fetch('web-production-85322.up.railway.app/appointments', {
         headers: { Authorization: `Bearer ${token}` },
       });
       const appointmentsData = await appointmentsRes.json();
@@ -97,7 +97,7 @@ export default function DashboardPage() {
     if (!newPatientName || !token) return;
     
     try {
-      await fetch('https://young-inlet-39708.herokuapp.com/patients', {
+      await fetch('web-production-85322.up.railway.app/patients', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -117,7 +117,7 @@ export default function DashboardPage() {
       const token = localStorage.getItem('accessToken');
       if (!newDoctor.name || !newDoctor.specialization || !token) return;
       try {
-          await fetch('https://young-inlet-39708.herokuapp.com/doctors', {
+          await fetch('web-production-85322.up.railway.app/doctors', {
               method: 'POST',
               headers: {
                   'Content-Type': 'application/json',
@@ -138,7 +138,7 @@ export default function DashboardPage() {
     if (!newAppointment.patientId || !newAppointment.doctorId || !newAppointment.time || !token) return;
 
     try {
-        await fetch('https://young-inlet-39708.herokuapp.com/appointments', {
+        await fetch('web-production-85322.up.railway.app/appointments', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -162,7 +162,7 @@ export default function DashboardPage() {
     if (!token) return;
 
     try {
-      await fetch(`https://young-inlet-39708.herokuapp.com/patients/${id}`, {
+      await fetch(`web-production-85322.up.railway.app/patients/${id}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
@@ -181,7 +181,7 @@ export default function DashboardPage() {
     if (!token) return;
 
     try {
-      await fetch(`https://young-inlet-39708.herokuapp.com/appointments/${id}`, {
+      await fetch(`web-production-85322.up.railway.app/appointments/${id}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
@@ -200,7 +200,7 @@ export default function DashboardPage() {
     if (!token) return;
     
     try {
-      await fetch(`https://young-inlet-39708.herokuapp.com/patients/${id}`, {
+      await fetch(`web-production-85322.up.railway.app/patients/${id}`, {
         method: 'DELETE',
         headers: {
           Authorization: `Bearer ${token}`,
@@ -217,7 +217,7 @@ export default function DashboardPage() {
     if (!token) return;
     
     try {
-      await fetch(`https://young-inlet-39708.herokuapp.com/doctors/${id}`, {
+      await fetch(`web-production-85322.up.railway.app/doctors/${id}`, {
         method: 'DELETE',
         headers: {
           Authorization: `Bearer ${token}`,
@@ -234,7 +234,7 @@ export default function DashboardPage() {
     if (!token) return;
     
     try {
-      await fetch(`https://young-inlet-39708.herokuapp.com/appointments/${id}`, {
+      await fetch(`web-production-85322.up.railway.app/appointments/${id}`, {
         method: 'DELETE',
         headers: { Authorization: `Bearer ${token}` },
       });
